@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { Loader } from '../Loader';
 import { Todo } from '../../types/Todo';
 import { getUser } from '../../api';
@@ -6,13 +6,13 @@ import { User } from '../../types/User';
 
 type Props = {
   selectedTodo: Todo | null;
-  setSelectedTodo: (todo: Todo | null) => void;
+  setSelectedTodo: Dispatch<SetStateAction<Todo | null>>;
 };
 
 export const TodoModal: React.FC<Props> = props => {
   const { selectedTodo, setSelectedTodo } = props;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(() => {

@@ -1,8 +1,11 @@
+import { Dispatch, SetStateAction } from 'react';
+import { Status } from '../../types/Status';
+
 type Props = {
   query: string;
-  setQuery: (value: string) => void;
-  status: string;
-  setStatus: (value: string) => void;
+  setQuery: Dispatch<SetStateAction<string>>;
+  status: Status;
+  setStatus: Dispatch<SetStateAction<Status>>;
 };
 
 export const TodoFilter: React.FC<Props> = props => {
@@ -15,11 +18,11 @@ export const TodoFilter: React.FC<Props> = props => {
           <select
             data-cy="statusSelect"
             value={status}
-            onChange={event => setStatus(event.target.value)}
+            onChange={event => setStatus(event.target.value as Status)}
           >
-            <option value="all">All</option>
-            <option value="active">Active</option>
-            <option value="completed">Completed</option>
+            <option value={Status.All}>All</option>
+            <option value={Status.Active}>Active</option>
+            <option value={Status.Completed}>Completed</option>
           </select>
         </span>
       </p>
@@ -38,6 +41,7 @@ export const TodoFilter: React.FC<Props> = props => {
         </span>
 
         {query && (
+          //style? class?
           <span className="icon is-right" style={{ pointerEvents: 'all' }}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
